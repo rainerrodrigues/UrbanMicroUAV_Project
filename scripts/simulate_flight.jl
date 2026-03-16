@@ -25,4 +25,9 @@ println("Running Bayesian Inference...")
 model = estimate_drag(noisy_data, prob)
 chain = sample(model, NUTS(), 500) # Using the No-U-Turn Sampler
 
-display(chain)
+println("#n--- Inference Results---")
+display(describe(chain))
+
+mean_c = mean(chain[:c])
+println("\nTrue Drag Coefficient: 0.42")
+println("Estimated Drag Coefficient: ", round(mean_c, digits=3))
