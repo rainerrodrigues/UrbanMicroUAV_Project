@@ -1,0 +1,7 @@
+cat << 'EOF' > .gitignore
+.DS_Store
+Manifest.toml
+data/
+*.pdf
+*.png
+EOF
