@@ -8,6 +8,7 @@ using .Dynamics
 using .Inference
 using DifferentialEquations
 using Turing
+using StatsPlots
 
 # Setup True Simulation
 u0 = [0.0, 0.0] # start at ground, 0 velocity
@@ -31,3 +32,14 @@ display(describe(chain))
 mean_c = mean(chain[:c])
 println("\nTrue Drag Coefficient: 0.42")
 println("Estimated Drag Coefficient: ", round(mean_c, digits=3))
+
+println("\nGenerating plots...")
+# Using the default GR backend for Plots
+gr() 
+
+# Charting the plot
+p = plot(chain)
+
+# Saving the plot as an image file so you can view it on Ubuntu
+savefig(p, "posterior_plot.png")
+println("Success! Open 'posterior_plot.png' in your project folder to see the results.")
