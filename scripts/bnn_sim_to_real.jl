@@ -33,7 +33,7 @@ Y = true_turbulence .+ 0.2 .* randn(N_samples)
     b2 ~ filldist(Normal(0, 1), 1)
     
     # Forward Pass through the network
-    for i in 1:size(X, 2)
+    for i in eachindex(X, 2)
         # Hidden layer with a 'tanh' non-linear activation function
         hidden = tanh.(W1 * X[:, i] .+ b1)
         

@@ -16,7 +16,7 @@ using SciMLSensitivity # Needed for diff-eq gradients
     sol = solve(new_prob, Tsit5(), saveat=0.1)
     
     # Observation Model: Comparing simulation to noisy sensor data
-    for i in 1:length(noisy_altitude_data)
+    for i in eachindex(noisy_altitude_data)
         noisy_altitude_data[i] ~ Normal(sol[1, i], 0.1) # 0.1 is sensor noise
     end
 end

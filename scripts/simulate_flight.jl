@@ -8,6 +8,7 @@ using .Dynamics
 using .Inference
 using DifferentialEquations
 using Turing
+using Statistics
 using StatsPlots
 
 # Setup True Simulation
