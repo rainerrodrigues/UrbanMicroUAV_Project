@@ -4,7 +4,9 @@ using MeshCat
 using GeometryBasics
 using Colors
 using CoordinateTransformations
+using LinearAlgebra 
 using Random
+using FileIO
 
 println("Starting MeshCat Server inside WSL...")
 vis = Visualizer()
@@ -24,10 +26,12 @@ true_y = sin.(t) .* 5.0
 true_z = range(0, 20.0, length=N_steps)
 
 # Setting up the 3D Scene Geometry
-# Creating a simple "cyan box" to represent the drone
-drone_shape = Rect3f(Vec3f(-0.2, -0.2, -0.1), Vec3f(0.4, 0.4, 0.2))
-drone_material = MeshLambertMaterial(color=colorant"cyan")
-setobject!(vis["drone"], drone_shape, drone_material)
+println("Loading 3D drone mesh...")
+drone_path = joinpath(@__DIR__ , "new_dronev_whole.stl") 
+println("Loading 3D drone mesh from: ", drone_path)
+drone_mesh = load(drone_path) # Change to .stl if your file is an STL
+drone_material = MeshLambertMaterial(color=colorant"darkgrey")
+setobject!(vis["drone"], drone_mesh, drone_material)
 
 # Drawing the true flight path as a faint blue trail of dots
 path_points = [Point3f(true_x[i], true_y[i], true_z[i]) for i in 1:N_steps]
@@ -40,11 +44,15 @@ sleep(10)
 println("Simulating flight...")
 noise_level = 1.0
 
+# Scaling down the drone mesh for better visualization
+scale_factor = 0.005
 # Animation Loop
 for i in 1:N_steps
     # Moving the physical drone to its true position
-    settransform!(vis["drone"], Translation(true_x[i], true_y[i], true_z[i]))
-    
+    #settransform!(vis["drone"], Translation(true_x[i], true_y[i], true_z[i]))
+    settransform!(vis["drone"], 
+        Translation(true_x[i], true_y[i], true_z[i]) ∘ LinearMap(UniformScaling(scale_factor))
+    )
     # Generating 500 "ghost" particles representing the Particle Filter's uncertainty
     particles = [
         Point3f(
