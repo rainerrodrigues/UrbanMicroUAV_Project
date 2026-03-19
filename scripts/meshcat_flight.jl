@@ -44,6 +44,10 @@ sleep(10)
 println("Simulating flight...")
 noise_level = 1.0
 
+# If needed to align the positioning of the drone
+#local_offset = Translation(0.0, -1.5, 0.0) ∘ LinearMap(UniformScaling(0.05))
+#settransform!(vis["drone"]["geometry"], local_offset)
+
 # Scaling down the drone mesh for better visualization
 scale_factor = 0.005
 # Animation Loop
