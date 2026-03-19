@@ -45,5 +45,6 @@ plot!(p, 1:N_steps, est_x, label="Particle Filter Estimate", linewidth=3, color=
 vspan!(p, [10, 20], color=:gray, alpha=0.2, label="Building (GPS Blackout)")
 
 # Saving to the Results folder!
-savefig(p, "../results/particle_filter_tracking.png")
-println("Success! Open 'results/particle_filter_tracking.png' to see the tracked flight.")
+save_path = joinpath(@__DIR__, "..", "results", "particle_filter_tracking.png")
+savefig(p, save_path)
+println("Success! Saved to: ", save_path)

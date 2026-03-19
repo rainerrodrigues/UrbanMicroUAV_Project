@@ -41,5 +41,6 @@ gr()
 p = plot(chain)
 
 # Saving to the results folder
-savefig(p, "../results/bnn_uncertainty_bounds.png")
-println("Success! Open 'results/bnn_uncertainty_bounds.png' to see the network's confidence distributions.")
+save_path = joinpath(@__DIR__, "..", "results", "bnn_uncertainty_bounds.png")
+savefig(p, save_path)
+println("Success! Saved to: ", save_path)
