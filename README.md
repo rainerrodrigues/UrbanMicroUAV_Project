@@ -7,7 +7,7 @@
 
 > A complete, uncertainty-aware robotics software stack built entirely in Julia. This project bridges the gap between hardware co-design and software control, demonstrating advanced Bayesian methods for navigating highly turbulent, unpredictable urban environments (e.g., high-rise wind corridors).
 
-![3D Flight Simulation](results/Meshcat_Julia_Drone.gif.gif)
+![3D Flight Simulation](results/Meshcat_Julia_Drone.gif)
 
 ## 🧠 Core Architecture
 
